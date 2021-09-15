@@ -8,10 +8,10 @@ class Ingredient (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    var id: Long? = null,
+    var id: Long,
 
     @Column(name = "name", nullable = false)
-    var name: String? = null,
+    var name: String,
 
     @Column(name = "calories")
     var calories: Int? = null,

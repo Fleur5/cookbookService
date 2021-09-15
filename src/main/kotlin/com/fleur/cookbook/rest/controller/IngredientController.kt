@@ -21,5 +21,5 @@ class IngredientController {
     fun getIngredientByName(@PathVariable("name") name: String) = ingredientService.findIngredientByName(name)
 
     @PostMapping("")
-    fun postIngredient(@RequestBody ingredient: Ingredient) = ingredientService.saveIngredient(ingredient)
+    fun saveIngredient(@RequestBody ingredient: Ingredient) = ingredientService.saveIngredient(ingredient)
 }
