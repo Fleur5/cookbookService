@@ -15,5 +15,5 @@ class IngredientService {
 
     fun findIngredientByName(name: String?) = ingredientRepository.findAllByName(name)
 
-    //fun saveIngredient(ingredient: Ingredient?) = ingredientRepository.save(ingredient)
+    fun saveIngredient(ingredient: Ingredient) = ingredientRepository.save(ingredient)
 }
