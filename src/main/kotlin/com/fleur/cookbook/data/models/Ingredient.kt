@@ -8,17 +8,17 @@ class Ingredient (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    var id: Long,
+    var id: Long = -1,
 
     @Column(name = "name", nullable = false)
-    var name: String,
+    var name: String = "",
 
     @Column(name = "calories")
     var calories: Int? = null,
 
     @Column(name = "vegan")
-    var vegan: Boolean? = null,
+    var vegan: Boolean? = false,
 
     @Column(name = "vegetarian")
-    var vegetarian: Boolean? = null,
+    var vegetarian: Boolean? = false,
 )

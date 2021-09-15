@@ -10,10 +10,10 @@ class Recipe (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    var id: Long,
+    var id: Long = -1,
 
     @Column(name = "name", nullable = false)
-    var name: String,
+    var name: String = "",
 
     @Column(name = "preparation_duration")
     var preparationDuration: Int? = null,
@@ -22,6 +22,6 @@ class Recipe (
     var waitingTime: Int? = null,
 
     @Type(type = "com.vladmihalcea.hibernate.type.json.JsonBinaryType")
-    @Column(name = "preparation_steps")
+    @Column(name = "preparation_steps", nullable = false)
     var preparationSteps: JsonNode
 )
