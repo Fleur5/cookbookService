@@ -7,7 +7,7 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-class FullRecipeId : Serializable {
+class FullRecipeId() : Serializable {
     @Column(name = "recipe_id", nullable = false)
     var recipeId: Int? = null
 
@@ -27,5 +27,10 @@ class FullRecipeId : Serializable {
 
     companion object {
         private const val serialVersionUID = -5455220081055349676L
+    }
+
+    constructor(recipeId: Int?, ingredientId: Int?) : this() {
+        this.recipeId = recipeId
+        this.ingredientId = ingredientId
     }
 }

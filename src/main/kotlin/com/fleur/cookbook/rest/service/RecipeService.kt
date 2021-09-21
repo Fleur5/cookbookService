@@ -3,6 +3,7 @@ package com.fleur.cookbook.rest.service
 import com.fleur.cookbook.data.models.FullRecipe
 import com.fleur.cookbook.data.models.Recipe
 import com.fleur.cookbook.data.repositories.FullRecipeRepository
+import com.fleur.cookbook.data.repositories.IngredientRepository
 import com.fleur.cookbook.data.repositories.RecipeRepository
 import com.fleur.cookbook.rest.requests.RecipeRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,6 +20,9 @@ class RecipeService {
     @Autowired
     lateinit var fullRecipeRepository: FullRecipeRepository
 
+    @Autowired
+    lateinit var ingredientRepository: IngredientRepository
+
     fun getAllRecipes(page: Int, size: Int): Page<Recipe?> =
         recipeRepository.findAll(PageRequest.of(page, size, Sort.by("name")))
 
@@ -28,7 +32,8 @@ class RecipeService {
         val recipe = Recipe(recipeRequest)
         recipeRepository.save(recipe)
         recipeRequest.ingredients.forEach { (id, amount) ->
-            fullRecipeRepository.save(FullRecipe(recipe, id, amount))
+            val ingredient = ingredientRepository.findById(id)
+            if (ingredient.isPresent) fullRecipeRepository.save(FullRecipe(recipe, ingredient.get(), amount))
         }
     }
 }

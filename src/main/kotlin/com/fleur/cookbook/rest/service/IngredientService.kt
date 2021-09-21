@@ -18,5 +18,7 @@ class IngredientService {
 
     fun findIngredientByName(name: String) = ingredientRepository.findAllByName(name).sortedBy { it?.id }
 
+    fun findIngredientById(id: Int) = ingredientRepository.findById(id)
+
     fun saveIngredient(ingredient: Ingredient) = ingredientRepository.save(ingredient)
 }

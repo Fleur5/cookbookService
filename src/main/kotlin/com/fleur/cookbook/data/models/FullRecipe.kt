@@ -24,12 +24,13 @@ class FullRecipe() {
     @JoinColumn(name = "ingredient_id", nullable = false, insertable = false, updatable = false)
     var ingredient: Ingredient? = null
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount_gram", nullable = false)
     var amount: Double? = null
 
-    constructor(recipe: Recipe, ingredientId: Int, amount: Double) : this() {
+    constructor(recipe: Recipe, ingredient: Ingredient, amount: Double) : this() {
+        this.id = FullRecipeId(recipe.id, ingredient.id)
         this.recipe = recipe
-        this.ingredient = Ingredient(ingredientId)
+        this.ingredient = ingredient
         this.amount = amount
     }
 }
