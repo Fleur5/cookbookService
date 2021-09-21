@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Table(name = "full_recipe")
 @Entity
-class FullRecipe {
+class FullRecipe() {
     @EmbeddedId
     var id: FullRecipeId? = null
 
@@ -25,5 +25,11 @@ class FullRecipe {
     var ingredient: Ingredient? = null
 
     @Column(name = "amount", nullable = false)
-    var amount: Int? = null
+    var amount: Double? = null
+
+    constructor(recipe: Recipe, ingredientId: Int, amount: Double) : this() {
+        this.recipe = recipe
+        this.ingredient = Ingredient(ingredientId)
+        this.amount = amount
+    }
 }

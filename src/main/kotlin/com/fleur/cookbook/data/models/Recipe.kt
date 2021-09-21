@@ -1,12 +1,13 @@
 package com.fleur.cookbook.data.models
 
 import com.fasterxml.jackson.databind.JsonNode
+import com.fleur.cookbook.rest.requests.RecipeRequest
 import org.hibernate.annotations.Type
 import javax.persistence.*
 
 @Table(name = "recipe")
 @Entity
-class Recipe {
+class Recipe() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -31,4 +32,11 @@ class Recipe {
         orphanRemoval = true
     )
     var ingredients: MutableSet<FullRecipe> = mutableSetOf()
+
+    constructor(request: RecipeRequest) : this() {
+        this.name = request.name
+        this.preparationDuration = request.preparationDuration
+        this.waitingTime = request.waitingTime
+        this.preparationSteps = request.preparationSteps
+    }
 }

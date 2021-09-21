@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Table(name = "ingredient")
 @Entity
-class Ingredient {
+class Ingredient() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +29,8 @@ class Ingredient {
         orphanRemoval = true
     )
     var recipes: MutableSet<FullRecipe> = mutableSetOf()
+
+    constructor(id: Int) : this() {
+        this.id = id
+    }
 }
