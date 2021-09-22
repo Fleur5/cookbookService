@@ -5,7 +5,7 @@ import com.fleur.cookbook.data.models.Recipe
 import com.fleur.cookbook.data.repositories.FullRecipeRepository
 import com.fleur.cookbook.data.repositories.IngredientRepository
 import com.fleur.cookbook.data.repositories.RecipeRepository
-import com.fleur.cookbook.rest.requests.RecipeRequest
+import com.fleur.cookbook.rest.models.RecipeRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest

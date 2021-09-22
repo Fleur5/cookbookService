@@ -1,4 +1,4 @@
-package com.fleur.cookbook.rest.requests
+package com.fleur.cookbook.rest.models
 
 import com.fasterxml.jackson.databind.JsonNode
 

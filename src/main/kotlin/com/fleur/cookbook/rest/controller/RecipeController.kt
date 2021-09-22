@@ -1,6 +1,6 @@
 package com.fleur.cookbook.rest.controller
 
-import com.fleur.cookbook.rest.requests.RecipeRequest
+import com.fleur.cookbook.rest.models.RecipeRequest
 import com.fleur.cookbook.rest.service.RecipeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

@@ -17,6 +17,9 @@ class IngredientController {
     fun getAllIngredients(@RequestParam("page") page: Int, @RequestParam("size") size: Int) =
         ingredientService.getAllIngredients(page = page, size = size)
 
+    @GetMapping("/{id}")
+    fun getIngredientById(@PathVariable("id") id: Int) = ingredientService.findIngredientById(id)
+
     @GetMapping("/{name}")
     fun getIngredientByName(@PathVariable("name") name: String) = ingredientService.findIngredientByName(name)
 

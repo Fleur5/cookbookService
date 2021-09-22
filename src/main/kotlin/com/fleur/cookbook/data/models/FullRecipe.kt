@@ -1,5 +1,6 @@
 package com.fleur.cookbook.data.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fleur.cookbook.data.models.keys.FullRecipeId
 import javax.persistence.*
 
@@ -7,6 +8,7 @@ import javax.persistence.*
 @Table(name = "full_recipe")
 @Entity
 class FullRecipe() {
+    @JsonIgnore
     @EmbeddedId
     var id: FullRecipeId? = null
 

@@ -1,4 +1,4 @@
-package com.fleur.cookbook.rest.exceptions
+package com.fleur.cookbook.rest.models.exceptions
 
 import org.springframework.http.HttpStatus
 

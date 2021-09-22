@@ -1,11 +1,13 @@
 package com.fleur.cookbook.data.models
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import javax.persistence.*
 
 @Table(name = "ingredient")
 @Entity
-class Ingredient() {
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator::class, property = "id", scope = Int::class)
+class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -26,11 +28,7 @@ class Ingredient() {
     @OneToMany(
         mappedBy = "ingredient",
         cascade = [CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH],
-        orphanRemoval = true
+        orphanRemoval = true, fetch = FetchType.EAGER
     )
     var recipes: MutableSet<FullRecipe> = mutableSetOf()
-
-    constructor(id: Int) : this() {
-        this.id = id
-    }
 }
