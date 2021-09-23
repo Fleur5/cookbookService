@@ -11,5 +11,7 @@ data class RecipeRequest(
 
     var preparationSteps: JsonNode,
 
-    var ingredients: Map<Int, Double>
+    var ingredients: Map<Int, Double>,
+
+    var tags: Set<Int>
 )

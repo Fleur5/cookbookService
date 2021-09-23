@@ -36,10 +36,19 @@ class Recipe() {
     )
     var ingredients: MutableSet<FullRecipe> = mutableSetOf()
 
-    constructor(request: RecipeRequest) : this() {
+    @ManyToMany
+    @JoinTable(
+        name = "recipe_tag",
+        joinColumns = [JoinColumn(name = "recipe_id")],
+        inverseJoinColumns = [JoinColumn(name = "tag_id")]
+    )
+    var tags: MutableSet<Tag> = mutableSetOf()
+
+    constructor(request: RecipeRequest, tags: Iterable<Tag>) : this() {
         this.name = request.name
         this.preparationDuration = request.preparationDuration
         this.waitingTime = request.waitingTime
         this.preparationSteps = request.preparationSteps
+        this.tags = tags.toMutableSet()
     }
 }

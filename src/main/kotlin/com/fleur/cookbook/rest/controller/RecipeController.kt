@@ -16,6 +16,9 @@ class RecipeController {
     fun getAllRecipes(@RequestParam("page") page: Int, @RequestParam("size") size: Int) =
         recipeService.getAllRecipes(page, size)
 
+    @GetMapping("/{id}")
+    fun getRecipeById(@PathVariable("id") id: Int) = recipeService.findRecipeById(id)
+
     @GetMapping("/{name}")
     fun getRecipeByName(@PathVariable("name") name: String) = recipeService.findRecipeByName(name)
 
