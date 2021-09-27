@@ -40,6 +40,13 @@
             <artifactId>spring-web</artifactId>
         </dependency>
 
+        <!-- Swagger -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.10</version>
+        </dependency>
+
         <!-- Database dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,0 +1,373 @@
+swagger: "2.0"
+info:
+  description: "This is a backendservice for the cookbook application.  You can find the project at [github](https://github.com/Fleur5/cookbook)."
+  version: "1.0.0"
+  title: "Cookbook API"
+  contact:
+    email: "jantjej.99@gmail.com"
+host: "localhost"
+basePath: "/v1"
+tags:
+  - name: "recipe"
+  - name: "ingredient"
+    description: "All about ingredients including their links to recipes"
+  - name: "tag"
+    description: "Tags to categorize the recipes"
+schemes:
+  - "http"
+paths:
+  /recipe:
+    post:
+      tags:
+        - "recipe"
+      summary: "Add a new recipe"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Recipe object"
+          required: true
+          schema:
+            $ref: "#/definitions/Recipe"
+      responses:
+        "200":
+          description: "Successful operation"
+    get:
+      tags:
+        - "recipe"
+      summary: "Get a list of all recipes"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "query"
+          name: "page"
+          description: "Current page"
+          type: "integer"
+          required: true
+        - in: "query"
+          name: "size"
+          type: "integer"
+          description: "Content size"
+          required: true
+        - in: "query"
+          name: "name"
+          type: "string"
+          description: "Name of the recipe"
+          required: false
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/PageableRecipe"
+        "400":
+          description: "Request parameters missing"
+  /recipe/{id}:
+    get:
+      tags:
+        - "recipe"
+      summary: "Get recipe by id"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          type: "integer"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Recipe"
+  /ingredient:
+    post:
+      tags:
+        - "ingredient"
+      summary: "Add a new ingredient"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Ingredient object"
+          required: true
+          schema:
+            $ref: "#/definitions/Ingredient"
+      responses:
+        "200":
+          description: "Successful operation"
+    get:
+      tags:
+        - "ingredient"
+      summary: "Get a list of all ingredients"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "query"
+          name: "page"
+          description: "Current page"
+          type: "integer"
+          required: true
+        - in: "query"
+          name: "size"
+          type: "integer"
+          description: "Content size"
+          required: true
+        - in: "query"
+          name: "name"
+          type: "string"
+          description: "Name of the ingredient"
+          required: false
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/PageableIngredient"
+        "400":
+          description: "Request parameters missing"
+  /ingredient/{id}:
+    get:
+      tags:
+        - "ingredient"
+      summary: "Get ingredient by id"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          type: "integer"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Ingredient"
+  /tag:
+    post:
+      tags:
+        - "tag"
+      summary: "Add a new tag"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Tag object"
+          required: true
+          schema:
+            $ref: "#/definitions/Tag"
+      responses:
+        "200":
+          description: "Successful operation"
+    get:
+      tags:
+        - "tag"
+      summary: "Get a list of all tags"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "query"
+          name: "page"
+          description: "Current page"
+          type: "integer"
+          required: true
+        - in: "query"
+          name: "size"
+          type: "integer"
+          description: "Content size"
+          required: true
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/PageableTag"
+        "400":
+          description: "Request parameters missing"
+  /tag/{id}:
+    get:
+      tags:
+        - "tag"
+      summary: "Get tag by id"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          type: "integer"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Tag"
+definitions:
+  Recipe:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      preparationDuration:
+        type: "integer"
+      waitingTime:
+        type: "integer"
+      preparationSteps:
+        type: "object"
+        description: "Json Object"
+      ingredientList:
+        type: "object"
+        properties:
+          amount:
+            type: "integer"
+          id:
+            type: "integer"
+          name:
+            type: "string"
+          calories:
+            type: "integer"
+          vegetarian:
+            type: "boolean"
+          vegan:
+            type: "boolean"
+      tags:
+        type: "object"
+        properties:
+          id:
+            type: "integer"
+          name:
+            type: "string"
+  PageableRecipe:
+    type: "object"
+    properties:
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/Recipe"
+      pageable:
+        $ref: "#/definitions/Pageable"
+      last:
+        type: "boolean"
+      totalElements:
+        type: "integer"
+      totalPages:
+        type: "integer"
+      size:
+        type: "integer"
+      number:
+        type: "integer"
+      sort:
+        $ref: "#/definitions/Sort"
+      first:
+        type: "boolean"
+      numberOfElements:
+        type: "integer"
+      empty:
+        type: "boolean"
+  Ingredient:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      calories:
+        type: "integer"
+      vegetarian:
+        type: "boolean"
+      vegan:
+        type: "boolean"
+      recipes:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+            name:
+              type: "string"
+  PageableIngredient:
+    type: "object"
+    properties:
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/Ingredient"
+      pageable:
+        $ref: "#/definitions/Pageable"
+      last:
+        type: "boolean"
+      totalElements:
+        type: "integer"
+      totalPages:
+        type: "integer"
+      size:
+        type: "integer"
+      number:
+        type: "integer"
+      sort:
+        $ref: "#/definitions/Sort"
+      first:
+        type: "boolean"
+      numberOfElements:
+        type: "integer"
+      empty:
+        type: "boolean"
+  Tag:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+  PageableTag:
+    type: "object"
+    properties:
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/Tag"
+      pageable:
+        $ref: "#/definitions/Pageable"
+      last:
+        type: "boolean"
+      totalElements:
+        type: "integer"
+      totalPages:
+        type: "integer"
+      size:
+        type: "integer"
+      number:
+        type: "integer"
+      sort:
+        $ref: "#/definitions/Sort"
+      first:
+        type: "boolean"
+      numberOfElements:
+        type: "integer"
+      empty:
+        type: "boolean"
+  Pageable:
+    type: "object"
+    properties:
+      sort:
+        $ref: "#/definitions/Sort"
+      offset:
+        type: "integer"
+      pageNumber:
+        type: "integer"
+      pageSize:
+        type: "integer"
+      paged:
+        type: "boolean"
+      unpaged:
+        type: "boolean"
+  Sort:
+    type: "object"
+    properties:
+      empty:
+        type: "boolean"
+      sorted:
+        type: "boolean"
+      unsorted:
+        type: "boolean"

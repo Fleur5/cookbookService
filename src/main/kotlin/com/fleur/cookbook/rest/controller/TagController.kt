@@ -16,16 +16,10 @@ class TagController {
     fun getAllTags(
         @RequestParam("page") page: Int,
         @RequestParam("size") size: Int,
-        @RequestParam("name") name: String?
-    ) =
-        if (name == null) tagService.getAllTags(page, size)
-        else tagService.findTagByName(name)
+    ) = tagService.getAllTags(page, size)
 
     @GetMapping("/{id}")
     fun getTagById(@PathVariable("id") id: Int) = tagService.findTagById(id)
-
-    @GetMapping("/{name}")
-    fun getTagByName(@PathVariable("name") name: String) = tagService.findTagByName(name)
 
     @PostMapping
     fun saveTag(@RequestBody tag: Tag) = tagService.saveTagFromRequest(tag)
