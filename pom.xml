@@ -88,7 +88,7 @@
                         <configuration>
                             <classifier>spring-boot</classifier>
                             <mainClass>
-                                com.fleur.cookbook.CookbookApplication
+                                com.fleur.cookbook.CookbookApplication.kt
                             </mainClass>
                         </configuration>
                     </execution>
