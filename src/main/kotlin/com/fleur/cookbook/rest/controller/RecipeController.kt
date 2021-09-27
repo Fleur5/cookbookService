@@ -13,14 +13,17 @@ class RecipeController {
     lateinit var recipeService: RecipeService
 
     @GetMapping
-    fun getAllRecipes(@RequestParam("page") page: Int, @RequestParam("size") size: Int) =
-        recipeService.getAllRecipes(page, size)
+    fun getAllRecipes(
+        @RequestParam("page") page: Int,
+        @RequestParam("size") size: Int,
+        @RequestParam("name") name: String?
+    ) =
+        if (name == null) recipeService.getAllRecipes(page, size)
+        else recipeService.findRecipeByName(name)
+
 
     @GetMapping("/{id}")
     fun getRecipeById(@PathVariable("id") id: Int) = recipeService.findRecipeById(id)
-
-    @GetMapping("/{name}")
-    fun getRecipeByName(@PathVariable("name") name: String) = recipeService.findRecipeByName(name)
 
     @PostMapping
     fun saveRecipe(@RequestBody recipe: RecipeRequest) = recipeService.saveRecipeFromRequest(recipe)

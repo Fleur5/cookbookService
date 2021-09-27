@@ -14,8 +14,13 @@ class IngredientController {
     lateinit var ingredientService: IngredientService
 
     @GetMapping("")
-    fun getAllIngredients(@RequestParam("page") page: Int, @RequestParam("size") size: Int) =
-        ingredientService.getAllIngredients(page = page, size = size)
+    fun getAllIngredients(
+        @RequestParam("page") page: Int,
+        @RequestParam("size") size: Int,
+        @RequestParam("name") name: String?
+    ) =
+        if (name == null) ingredientService.getAllIngredients(page, size)
+        else ingredientService.findIngredientByName(name)
 
     @GetMapping("/{id}")
     fun getIngredientById(@PathVariable("id") id: Int) = ingredientService.findIngredientById(id)

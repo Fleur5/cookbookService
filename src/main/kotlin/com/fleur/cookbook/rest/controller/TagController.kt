@@ -13,8 +13,13 @@ class TagController {
     lateinit var tagService: TagService
 
     @GetMapping
-    fun getAllTags(@RequestParam("page") page: Int, @RequestParam("size") size: Int) =
-        tagService.getAllTags(page, size)
+    fun getAllTags(
+        @RequestParam("page") page: Int,
+        @RequestParam("size") size: Int,
+        @RequestParam("name") name: String?
+    ) =
+        if (name == null) tagService.getAllTags(page, size)
+        else tagService.findTagByName(name)
 
     @GetMapping("/{id}")
     fun getTagById(@PathVariable("id") id: Int) = tagService.findTagById(id)
