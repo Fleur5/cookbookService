@@ -88,7 +88,7 @@
                         <configuration>
                             <classifier>spring-boot</classifier>
                             <mainClass>
-                                com.fleur.cookbook.ExecutableMavenJar
+                                com.fleur.cookbook.CookbookApplication
                             </mainClass>
                         </configuration>
                     </execution>
