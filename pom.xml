@@ -10,13 +10,14 @@
     </parent>
     <groupId>com.fleur</groupId>
     <artifactId>cookbook</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>cookbook</name>
     <description>Backend service for cookbook application</description>
     <properties>
         <java.version>16</java.version>
         <kotlin.version>1.5.30</kotlin.version>
     </properties>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -79,6 +80,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>
+                                com.fleur.cookbook.ExecutableMavenJar
+                            </mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
