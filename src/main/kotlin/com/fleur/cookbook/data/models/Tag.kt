@@ -1,9 +1,12 @@
 package com.fleur.cookbook.data.models
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fleur.cookbook.data.models.serializers.TagSerializer
 import javax.persistence.*
 
 @Table(name = "tag")
 @Entity
+@JsonSerialize(using = TagSerializer::class)
 class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

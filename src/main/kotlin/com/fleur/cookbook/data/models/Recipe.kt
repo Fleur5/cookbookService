@@ -1,15 +1,15 @@
 package com.fleur.cookbook.data.models
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo
-import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fleur.cookbook.data.models.serializers.RecipeSerializer
 import com.fleur.cookbook.rest.models.RecipeRequest
 import org.hibernate.annotations.Type
 import javax.persistence.*
 
 @Table(name = "recipe")
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator::class, property = "id", scope = Int::class)
+@JsonSerialize(using = RecipeSerializer::class)
 class Recipe() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

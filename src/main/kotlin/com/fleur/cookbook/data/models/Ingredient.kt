@@ -2,11 +2,14 @@ package com.fleur.cookbook.data.models
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fleur.cookbook.data.models.serializers.IngredientSerializer
 import javax.persistence.*
 
 @Table(name = "ingredient")
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator::class, property = "id", scope = Int::class)
+@JsonSerialize(using = IngredientSerializer::class)
 class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
